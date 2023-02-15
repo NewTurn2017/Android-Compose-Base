@@ -32,51 +32,31 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeBaseTheme {
-                ModifierEx(onButtonClicked = {
-
-                })
+                Greeting("Good Morning")
             }
         }
     }
 }
 
 @Composable
-fun ModifierEx(onButtonClicked: () -> Unit) {
-    Button(
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = Color.Green,
-            contentColor = Color.White
-        ),
-        onClick = onButtonClicked,
-        modifier = Modifier
-            .size(200.dp)
-            .padding(10.dp),
-        enabled = false
+fun Greeting(name: String) {
+    Surface(
+        border = BorderStroke(2.dp, Color.Magenta),
+        modifier = Modifier.padding(10.dp),
+        elevation = 10.dp,
+        shape = CircleShape,
+        color = MaterialTheme.colors.error
 
     ) {
-        Icon(
-            imageVector = Icons.Filled.Search,
-            contentDescription = null,
-            modifier = Modifier
-                .background(Color.Red)
-                .offset(x = -20.dp)
-        )
-        Spacer(modifier = Modifier
-            .width(ButtonDefaults.IconSpacing)
-            .background(Color.Red))
-        Text(
-            text = "NAVER",
-            modifier = Modifier
-                .offset(x = 20.dp)
-                .background(Color.Red),
-        )
+        Text(text = "Hello $name!", modifier = Modifier.padding(8.dp))
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     ComposeBaseTheme {
-        ModifierEx(onButtonClicked = {})
+        Greeting("Hello Compose!")
     }
 }
