@@ -1,14 +1,17 @@
 package com.compose.composebase
 
+import android.graphics.drawable.Icon
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,38 +29,38 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeBaseTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-//                    Greeting("이거 좋은데?")
-                }
+                SendButton(onButtonClicked = {
+                    Toast.makeText(this, "Send Clicked", Toast.LENGTH_SHORT).show()
+                })
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(
-        modifier = Modifier.size(300.dp),
-        color = Color(0xffff9944),
-        text = "Hello $name!! Hello $name!!",
-        fontSize = 50.sp,
-        fontWeight = FontWeight.Bold,
-        fontFamily = FontFamily.Cursive,
-        letterSpacing = 2.sp,
-        maxLines = 2,
-        textDecoration = TextDecoration.Underline,
-        textAlign = TextAlign.Center
-    )
+fun SendButton(onButtonClicked: () -> Unit) {
+    Button(
+        onClick = onButtonClicked,
+        enabled = true,
+        border = BorderStroke(10.dp, Color.Magenta),
+        shape = CircleShape,
+        contentPadding = PaddingValues(20.dp),
+    ) {
+        Icon(
+            imageVector = Icons.Default.Send,
+            contentDescription = "Send",
+            tint = Color.White,
+            modifier = Modifier.size(18.dp)
+        )
+        Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing))
+        Text(text = "Send")
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     ComposeBaseTheme {
-        Greeting("world")
+        SendButton(onButtonClicked = {})
     }
 }
