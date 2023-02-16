@@ -9,6 +9,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.magnifier
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -16,6 +17,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
@@ -32,23 +34,28 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeBaseTheme {
-                Greeting("Good Morning")
+                BoxEx()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String) {
-    Surface(
-        border = BorderStroke(2.dp, Color.Magenta),
-        modifier = Modifier.padding(10.dp),
-        elevation = 10.dp,
-        shape = CircleShape,
-        color = MaterialTheme.colors.error
+fun BoxEx() {
 
-    ) {
-        Text(text = "Hello $name!", modifier = Modifier.padding(8.dp))
+//    Box(
+//        modifier = Modifier.size(100.dp)
+//    ) {
+//        Text(text = "Hello World", modifier = Modifier.align(Alignment.BottomEnd))
+//        Text(text = "Jetpack Compose", modifier = Modifier.align(Alignment.TopStart))
+//    }
+//    Box(modifier = Modifier.size(100.dp)) {
+//        Box(modifier = Modifier.size(70.dp).background(Color.Red).align(Alignment.TopStart))
+//        Box(modifier = Modifier.size(70.dp).background(Color.Blue).align(Alignment.BottomEnd))
+//    }
+    Box {
+        Box(modifier = Modifier.fillMaxSize().background(Color.Red).align(Alignment.CenterStart))
+        Box(modifier = Modifier.size(70.dp).background(Color.Blue).align(Alignment.Center))
     }
 }
 
@@ -57,6 +64,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     ComposeBaseTheme {
-        Greeting("Hello Compose!")
+        BoxEx()
     }
 }
