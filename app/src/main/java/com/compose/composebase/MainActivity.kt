@@ -36,31 +36,23 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeBaseTheme {
-                RowEx()
+                Column()
             }
         }
     }
 }
 
 @Composable
-fun RowEx() {
+fun Column() {
 
-    Row(
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .height(100.dp)
-            .width(300.dp)
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.size(100.dp)
     ) {
-        // underline modifier
-
-
-        Text(text = "Hello1", modifier = Modifier.weight(2f), textAlign = TextAlign.Center)
-        Icon(imageVector = Icons.Filled.Add, contentDescription = "Add", modifier = Modifier.weight(1f))
-        Text(text = "Hello2", modifier = Modifier.weight(2f))
-        Text(text = "=", modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
-        Text(text = "Hello3", modifier = Modifier.weight(2f), textAlign = TextAlign.Center)
-
+        Text(text = "첫 번째")
+        Text(text = "두 번째")
+        Text(text = "세 번째")
     }
 }
 
@@ -69,6 +61,6 @@ fun RowEx() {
 @Composable
 fun DefaultPreview() {
     ComposeBaseTheme {
-        RowEx()
+        Column()
     }
 }
