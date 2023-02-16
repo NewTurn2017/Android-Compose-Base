@@ -16,7 +16,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,74 +33,56 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberImagePainter
-import com.compose.composebase.MainActivity.Companion.cardData
 import com.compose.composebase.ui.theme.ComposeBaseTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             ComposeBaseTheme {
-                Column(
-                    verticalArrangement = Arrangement.Top,
-                ) {
-                    CardEx()
-                    Spacer(modifier = Modifier.height(4.dp))
-                    CardEx()
-                }
-
+                CheckBoxEx()
             }
         }
-
-
     }
-
-    companion object {
-        val cardData = CardData(
-            imageUrl = "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80",
-            imageDescription = "Image",
-            author = "Dev Devil",
-            description = "이 사람은 잘 생겼군요"
-        )
-    }
-
 }
 
 @Composable
-fun CardEx() {
+fun CheckBoxEx() {
 
-    val cardBackground = Color(0xFFE0E0E0)
-    val placeHolderColor = Color(0xFFC98585)
-
-    Card(
-        elevation = 8.dp,
+    // Row with 2 columns
+    // Check Box And Text
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
-            .padding(4.dp)
             .fillMaxWidth()
-            .height(100.dp),
-        shape = RoundedCornerShape(8.dp),
-        backgroundColor = cardBackground,
-        border = BorderStroke(1.dp, Color.Cyan),
-        contentColor = Color.Black,
+            .padding(8.dp)
+            .height(100.dp)
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            AsyncImage(
-                model = cardData.imageUrl,
-                contentDescription = cardData.imageDescription,
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(CircleShape),
+        // Check Box
+        var checked by remember { mutableStateOf(false) }
+        Checkbox(
+            checked = checked,
+            onCheckedChange = {
+                checked = !checked
+            },
+            modifier = Modifier
+                .padding(16.dp)
+                .size(24.dp)
+        )
+
+        // Text
+        Text(
+            text = "This is a check box",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            fontFamily = FontFamily.SansSerif,
+            color = Color.Black,
+            modifier = Modifier
+                .padding(16.dp)
+                .clickable { checked = !checked },
+
             )
-            Spacer(modifier = Modifier.width(16.dp))
-            Column(
-                modifier = Modifier
-                    .fillMaxHeight(),
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(text = cardData.author, fontSize = 32.sp, fontWeight = FontWeight.Bold)
-                Text(text = cardData.description, fontSize = 16.sp)
-            }
-        }
     }
 
 }
@@ -110,19 +92,7 @@ fun CardEx() {
 @Composable
 fun DefaultPreview() {
     ComposeBaseTheme {
-        Column(
-            verticalArrangement = Arrangement.Top,
-        ) {
-            CardEx()
-            Spacer(modifier = Modifier.height(4.dp))
-            CardEx()
-        }
+        CheckBoxEx()
     }
 }
 
-data class CardData(
-    val imageUrl: String,
-    val imageDescription: String,
-    val author: String,
-    val description: String
-)
