@@ -41,48 +41,41 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             ComposeBaseTheme {
-                CheckBoxEx()
+                Greeting()
             }
         }
     }
 }
 
 @Composable
-fun CheckBoxEx() {
+fun Greeting() {
 
-    // Row with 2 columns
-    // Check Box And Text
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-            .height(100.dp)
-    ) {
-        // Check Box
-        var checked by remember { mutableStateOf(false) }
-        Checkbox(
-            checked = checked,
-            onCheckedChange = {
-                checked = !checked
-            },
+    val (name, setName) = remember { mutableStateOf("") }
+    // TextField and Text in Column
+    Column() {
+        OutlinedTextField(
+            value = name,
+            onValueChange = { setName(it) },
+            label = { Text(text = "Enter your name") },
+            leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "Search") },
+            trailingIcon = { Icon(Icons.Filled.Send, contentDescription = "Send") },
             modifier = Modifier
-                .padding(16.dp)
-                .size(24.dp)
+                .fillMaxWidth()
+                .padding(10.dp)
         )
 
-        // Text
         Text(
-            text = "This is a check box",
-            fontSize = 24.sp,
+            text = "Robot : $name",
+            fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.SansSerif,
-            color = Color.Black,
+            color = Color.Red,
+            textAlign = TextAlign.Center,
+            textDecoration = TextDecoration.Underline,
             modifier = Modifier
-                .padding(16.dp)
-                .clickable { checked = !checked },
-
-            )
+                .fillMaxWidth()
+                .padding(10.dp)
+        )
     }
 
 }
@@ -92,7 +85,7 @@ fun CheckBoxEx() {
 @Composable
 fun DefaultPreview() {
     ComposeBaseTheme {
-        CheckBoxEx()
+        Greeting()
     }
 }
 
