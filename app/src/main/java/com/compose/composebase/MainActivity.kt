@@ -36,24 +36,36 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeBaseTheme {
-                Column()
+                Outer()
             }
         }
     }
 }
 
 @Composable
-fun Column() {
-
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier.size(100.dp)
-    ) {
-        Text(text = "첫 번째")
-        Text(text = "두 번째")
-        Text(text = "세 번째")
+fun Outer() {
+    Column {
+        Inner(
+            modifier = Modifier
+                .widthIn(min = 100.dp, max = 350.dp)
+                .heightIn(min = 160.dp)
+        )
     }
+
+}
+
+@Composable
+fun Inner(modifier: Modifier = Modifier) {
+    BoxWithConstraints(modifier) {
+        if (maxHeight > 150.dp) {
+            Text(
+                text = "여기 꽤 길군요.",
+                modifier = Modifier.align(Alignment.BottomCenter),
+            )
+        }
+        Text("maxW: ${maxWidth}, maxH: ${maxHeight}, minW: ${minWidth}, minH: $minHeight")
+    }
+
 }
 
 
@@ -61,6 +73,6 @@ fun Column() {
 @Composable
 fun DefaultPreview() {
     ComposeBaseTheme {
-        Column()
+        Outer()
     }
 }
