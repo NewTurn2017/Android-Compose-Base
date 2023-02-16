@@ -2,6 +2,7 @@ package com.compose.composebase
 
 import android.graphics.drawable.Icon
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,6 +15,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.Composable
@@ -34,28 +36,31 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeBaseTheme {
-                BoxEx()
+                RowEx()
             }
         }
     }
 }
 
 @Composable
-fun BoxEx() {
+fun RowEx() {
 
-//    Box(
-//        modifier = Modifier.size(100.dp)
-//    ) {
-//        Text(text = "Hello World", modifier = Modifier.align(Alignment.BottomEnd))
-//        Text(text = "Jetpack Compose", modifier = Modifier.align(Alignment.TopStart))
-//    }
-//    Box(modifier = Modifier.size(100.dp)) {
-//        Box(modifier = Modifier.size(70.dp).background(Color.Red).align(Alignment.TopStart))
-//        Box(modifier = Modifier.size(70.dp).background(Color.Blue).align(Alignment.BottomEnd))
-//    }
-    Box {
-        Box(modifier = Modifier.fillMaxSize().background(Color.Red).align(Alignment.CenterStart))
-        Box(modifier = Modifier.size(70.dp).background(Color.Blue).align(Alignment.Center))
+    Row(
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .height(100.dp)
+            .width(300.dp)
+    ) {
+        // underline modifier
+
+
+        Text(text = "Hello1", modifier = Modifier.weight(2f), textAlign = TextAlign.Center)
+        Icon(imageVector = Icons.Filled.Add, contentDescription = "Add", modifier = Modifier.weight(1f))
+        Text(text = "Hello2", modifier = Modifier.weight(2f))
+        Text(text = "=", modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
+        Text(text = "Hello3", modifier = Modifier.weight(2f), textAlign = TextAlign.Center)
+
     }
 }
 
@@ -64,6 +69,6 @@ fun BoxEx() {
 @Composable
 fun DefaultPreview() {
     ComposeBaseTheme {
-        BoxEx()
+        RowEx()
     }
 }
