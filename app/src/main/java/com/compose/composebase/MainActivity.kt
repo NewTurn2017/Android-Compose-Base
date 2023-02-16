@@ -29,6 +29,9 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.compose.AsyncImagePainter
+import coil.compose.rememberImagePainter
 import com.compose.composebase.ui.theme.ComposeBaseTheme
 
 class MainActivity : ComponentActivity() {
@@ -36,32 +39,42 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeBaseTheme {
-                Greeting()
-
+                CoilEx()
             }
         }
     }
 }
 
 @Composable
-fun Greeting() {
-    Column {
-        Image(
-            painter = painterResource(id = R.drawable.wall),
-            contentDescription = "엔텔로프 캐년",
-        )
+fun CoilEx() {
 
-        Image(
-            imageVector = Icons.Filled.Settings,
-            contentDescription = "설정",
+//    val painter = rememberImagePainter(
+//        data = "https://images.unsplash.com/photo-1676298492566-90b53e61ef65?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2984&q=80"
+//    )
+//
+//    Image(painter = painter, contentDescription = "Image")
+
+    Column {
+        AsyncImage(
+            modifier = Modifier.height(300.dp),
+            model = "https://images.unsplash.com/photo-1676298492566-90b53e61ef65?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2984&q=80",
+            contentDescription = "Image",
+        )
+        AsyncImage(
+            modifier = Modifier.height(300.dp),
+            model = "https://images.unsplash.com/photo-1676298492566-90b53e61ef65?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2984&q=80",
+            contentDescription = "Image",
         )
     }
+
+
 }
 
-@Preview (showBackground = true)
+
+@Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     ComposeBaseTheme {
-        Greeting()
+        CoilEx()
     }
 }
