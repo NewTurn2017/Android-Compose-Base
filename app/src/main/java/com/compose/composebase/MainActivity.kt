@@ -12,10 +12,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Send
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,41 +38,46 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             ComposeBaseTheme {
-                Greeting()
+                TopBarEx()
             }
         }
     }
 }
 
 @Composable
-fun Greeting() {
+fun TopBarEx(name: String = "World") {
 
-    val (name, setName) = remember { mutableStateOf("") }
-    // TextField and Text in Column
-    Column() {
-        OutlinedTextField(
-            value = name,
-            onValueChange = { setName(it) },
-            label = { Text(text = "Enter your name") },
-            leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "Search") },
-            trailingIcon = { Icon(Icons.Filled.Send, contentDescription = "Send") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp)
+
+    Column {
+        TopAppBar(
+            title = { Text(text = "TopAppBar") },
+            navigationIcon = {
+                IconButton(
+                    onClick = { /*TODO*/ },
+                ) {
+                    Icon(Icons.Filled.ArrowBack, contentDescription = "back")
+                }
+            },
+            actions = {
+                IconButton(
+                    onClick = { /*TODO*/ },
+                ) {
+                    Icon(Icons.Filled.Search, contentDescription = "search")
+                }
+                IconButton(
+                    onClick = { /*TODO*/ },
+                ) {
+                    Icon(Icons.Filled.Settings, contentDescription = "settings")
+                }
+                IconButton(
+                    onClick = { /*TODO*/ },
+                ) {
+                    Icon(Icons.Filled.AccountBox, contentDescription = "account")
+                }
+            }
         )
 
-        Text(
-            text = "Robot : $name",
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold,
-            fontFamily = FontFamily.SansSerif,
-            color = Color.Red,
-            textAlign = TextAlign.Center,
-            textDecoration = TextDecoration.Underline,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp)
-        )
+        Text(text = "Hello $name!")
     }
 
 }
@@ -85,7 +87,7 @@ fun Greeting() {
 @Composable
 fun DefaultPreview() {
     ComposeBaseTheme {
-        Greeting()
+        TopBarEx()
     }
 }
 
